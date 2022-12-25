@@ -14,6 +14,7 @@ class RssItem {
   final String? title;
   final String? description;
   final String? link;
+  final String? image;
 
   final List<RssCategory> categories;
   final String? guid;
@@ -32,6 +33,7 @@ class RssItem {
     this.title,
     this.description,
     this.link,
+    this.image,
     this.categories = const <RssCategory>[],
     this.guid,
     this.pubDate,
@@ -51,7 +53,11 @@ class RssItem {
       title: findElementOrNull(element, 'title')?.text,
       description: findElementOrNull(element, 'description')?.text,
       link: findElementOrNull(element, 'link')?.text,
-      categories: element.findElements('category').map((element) => RssCategory.parse(element)).toList(),
+      image: findElementOrNull(element, 'image')?.text,
+      categories: element
+          .findElements('category')
+          .map((element) => RssCategory.parse(element))
+          .toList(),
       guid: findElementOrNull(element, 'guid')?.text,
       pubDate: findElementOrNull(element, 'pubDate')?.text,
       author: findElementOrNull(element, 'author')?.text,
